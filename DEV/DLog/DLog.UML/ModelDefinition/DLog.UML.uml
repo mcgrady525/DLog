@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
+  dslVersion="1.0.0.0"
+  Id="5b21c6da-a733-4651-9af4-d4ea3da00539"
+  name="DLog.UML" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="3cb76b84-d26c-42a7-8efa-67c581dd59e2">
+      <body>EF,Model First</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="895cdf7e-5689-4ad1-83ee-b22ce8ab1eee"
+          LastKnownName="Data"
+          LastKnownLocation="DLog.UML.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="1c4c0b3f-1f92-4327-a00d-06f337185c4d">
+      <body>Web API</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="a9c7ffad-f42e-4668-9f26-ef5614c1851e"
+          LastKnownName="OpenAPI"
+          LastKnownLocation="DLog.UML.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="0ffd90b1-a1c8-4ddc-89ad-63e2cc81ce3f">
+      <body>MVC</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="2409e61c-2a66-40c1-ae5a-0dac52540a84"
+          LastKnownName="Offline"
+          LastKnownLocation="DLog.UML.uml" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <activity
+        Id="60a3ab2d-482f-4e16-8015-26954cefe7ca"
+        name="DLog架构图"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <opaqueAction
+            Id="895cdf7e-5689-4ad1-83ee-b22ce8ab1eee"
+            name="Data"
+            isLeaf="false" />
+          <opaqueAction
+            Id="14f74122-dc79-4cc9-b358-33b995b93d73"
+            name="WCF BIZ"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="19c7c21a-bcff-4ae5-878f-97f4e728f80a"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="895cdf7e-5689-4ad1-83ee-b22ce8ab1eee"
+                  LastKnownName="Data"
+                  LastKnownLocation="DLog.UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="a9c7ffad-f42e-4668-9f26-ef5614c1851e"
+            name="OpenAPI"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="edbbd212-d800-44e5-b22c-a536127e6ee7"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="14f74122-dc79-4cc9-b358-33b995b93d73"
+                  LastKnownName="WCF BIZ"
+                  LastKnownLocation="DLog.UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="2409e61c-2a66-40c1-ae5a-0dac52540a84"
+            name="Offline"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="7e3111ae-1e89-40bd-8d6a-20e84a59edb7"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="14f74122-dc79-4cc9-b358-33b995b93d73"
+                  LastKnownName="WCF BIZ"
+                  LastKnownLocation="DLog.UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="0c436f72-2146-417c-a8dc-42e78e148509"
+            name="Entity"
+            isLeaf="false" />
+          <opaqueAction
+            Id="5d2a7821-9c39-4ff8-b246-46a0fcbd8e56"
+            name="Common"
+            isLeaf="false" />
+          <opaqueAction
+            Id="33d69a60-eeef-4d7e-88eb-948e966c5afa"
+            name="Cache"
+            isLeaf="false" />
+          <opaqueAction
+            Id="aa1f01fb-2f44-46eb-8e17-cb6a241634b5"
+            name="Session"
+            isLeaf="false" />
+          <opaqueAction
+            Id="2b36a7af-fe7f-40f6-8b41-0f6e23e88731"
+            name="Log"
+            isLeaf="false" />
+          <opaqueAction
+            Id="e2f84cd4-fece-46e3-be11-11a7a2b197b0"
+            name="序列化"
+            isLeaf="false" />
+          <opaqueAction
+            Id="bfc3ed7d-948c-49b5-ad61-2dec784672c8"
+            name="Config"
+            isLeaf="false" />
+          <opaqueAction
+            Id="f03b069e-9765-40f9-be87-65c348e27db8"
+            name="Exception"
+            isLeaf="false" />
+          <opaqueAction
+            Id="7807d9b0-f15c-4760-988e-a8538e90cd2c"
+            name="Scheduler"
+            isLeaf="false" />
+          <opaqueAction
+            Id="66410b83-e8e5-404a-a561-8ecc2b3a985d"
+            name="ABS"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a8ff2940-e42b-4aa1-9fff-f11894edae28"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="a9c7ffad-f42e-4668-9f26-ef5614c1851e"
+                  LastKnownName="OpenAPI"
+                  LastKnownLocation="DLog.UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="c9289689-c923-454f-b341-96912146d7e9"
+            name="HBS"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="d7c68f87-dc2e-4966-939c-6d1a82a596b9"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="a9c7ffad-f42e-4668-9f26-ef5614c1851e"
+                  LastKnownName="OpenAPI"
+                  LastKnownLocation="DLog.UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

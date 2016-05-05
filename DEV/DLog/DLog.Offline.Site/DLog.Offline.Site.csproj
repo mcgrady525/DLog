@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8D7E6815-7035-4FC9-A7CF-277EB3A4F5F7}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DLog.Offline.Site</RootNamespace>
+    <AssemblyName>DLog.Offline.Site</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44301</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Tmac.Frameworks.Common, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLL\Tmac.Frameworks.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tmac.Frameworks.Log, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLL\Tmac.Frameworks.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Webdiyer.MvcPager">
+      <HintPath>..\packages\Webdiyer.MvcPager.3.0.1.1\lib\Webdiyer.MvcPager.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JsonController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DebugLogListModel.cs" />
+    <Compile Include="Models\ErrorLogListModel.cs" />
+    <Compile Include="Models\PerfLogListModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\bar.gif" />
+    <Content Include="Content\images\header_bg.png" />
+    <Content Include="Content\images\invbar.gif" />
+    <Content Include="Content\images\meneame.jpg" />
+    <Content Include="Content\images\menu_bg.png" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\pagerstyles.css" />
+    <Content Include="Content\sinorca-print.css" />
+    <Content Include="Content\sinorca-screen-alt.css" />
+    <Content Include="Content\sinorca-screen.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\artDialog.v4.1.6\artDialog.js" />
+    <Content Include="Scripts\artDialog.v4.1.6\artDialog.source.js" />
+    <Content Include="Scripts\artDialog.v4.1.6\jquery.artDialog.js" />
+    <Content Include="Scripts\artDialog.v4.1.6\jquery.artDialog.source.js" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\aero_s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\aero_s2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_close.hover.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_close.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_e.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_n.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_ne.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_nw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_se.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_sw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_title_icon.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\aero\ie6\aui_w.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\bg.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\bg2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\bg_css3.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\bg_css3_2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\close.hover.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\close.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\e.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\n.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\ne.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\nw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\se.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\sw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\black\ie6\w.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\bg.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\bg2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\bg_css3.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\bg_css3_2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\close.hover.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\close.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\e.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\n.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\ne.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\nw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\se.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\sw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\blue\ie6\w.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\chrome.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\chrome\border.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\chrome\chrome_s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\default.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\bg.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\bg2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\bg_css3.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\bg_css3_2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\color_bg.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\close.hover.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\close.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\e.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\n.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\ne.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\nw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\se.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\sw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\green\ie6\w.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\icons\error.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\icons\face-sad.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\icons\face-smile.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\icons\loading.gif" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\icons\question.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\icons\succeed.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\icons\warning.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\idialog_s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\idialog_s2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_close.hover.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_close.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_e.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_n.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_ne.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_nw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_se.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_sw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\idialog\ie6\aui_w.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_close.hover.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_close.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_e.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_n.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_ne.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_nw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_s.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_se.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_sw.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\ie6\aui_w.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\s1.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\opera\s2.png" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\simple.css" />
+    <Content Include="Scripts\artDialog.v4.1.6\skins\twitter.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Common.js" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\Thumbs.db" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\FRMy97DatePicker\calendar.js" />
+    <Content Include="Scripts\FRMy97DatePicker\lang\en.js" />
+    <Content Include="Scripts\FRMy97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\FRMy97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\datepicker.css" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\dateselect.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\glass-bg.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\hd-sprite.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\img.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\left-btn.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\left-btn2.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\right-btn.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\skin\wingon\right-btn2.gif" />
+    <Content Include="Scripts\FRMy97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\MvcPager.js" />
+    <Content Include="Scripts\selector.js" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\1_close.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\1_open.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\2.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\3.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\4.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\5.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\6.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\7.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\8.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\diy\9.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\line_conn.gif" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\loading.gif" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\zTreeStandard.gif" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\img\zTreeStandard.png" />
+    <Content Include="Scripts\zTree.v3\css\zTreeStyle\zTreeStyle.css" />
+    <Content Include="Scripts\zTree.v3\js\jquery.ztree.core-3.5.js" />
+    <Content Include="Scripts\zTree.v3\js\jquery.ztree.core-3.5.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Menu\ErrorLogList.cshtml" />
+    <Content Include="Views\Menu\_ErrorLogList.cshtml" />
+    <Content Include="Views\Menu\_ErrorLogTable.cshtml" />
+    <Content Include="Views\Menu\ErrorLogDetail.cshtml" />
+    <Content Include="Views\Menu\DebugLogList.cshtml" />
+    <Content Include="Views\Menu\_DebugLogList.cshtml" />
+    <Content Include="Views\Menu\_DebugLogTable.cshtml" />
+    <Content Include="Views\Menu\DebugLogDetail.cshtml" />
+    <Content Include="Views\Menu\PerfLogList.cshtml" />
+    <Content Include="Views\Menu\_PerfLogList.cshtml" />
+    <Content Include="Views\Menu\_PerfLogTable.cshtml" />
+    <Content Include="Views\Menu\PerfLogDetail.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ClassNameSelector.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DataBaseSelector.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateInput.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DatePicker.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MethodNameSelector.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RemarkRegexSelector.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SourceSelector.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SystemCodeSelector.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\XmlRemarkSelector.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Header.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Workspace.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLog.Common\DLog.Common.csproj">
+      <Project>{ab9923c4-9545-4db2-8917-9e191c878f09}</Project>
+      <Name>DLog.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DLog.Entity\DLog.Entity.csproj">
+      <Project>{4987e03c-0d34-4d0b-b65c-9b486f223fa5}</Project>
+      <Name>DLog.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DLog.IService\DLog.IService.csproj">
+      <Project>{dc0c9ea1-ce0b-4804-b8ee-58d841ddeb88}</Project>
+      <Name>DLog.IService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>14639</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost.dev.wingontravel.com/DLogOfflineSite/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

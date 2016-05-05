@@ -1,0 +1,365 @@
+﻿<#
+//*********************************************************
+//
+//    Copyright (c) Microsoft. All rights reserved.
+//    This code is licensed under the Microsoft Public License.
+//    THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+//    ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+//    IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+//    PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+#>
+<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ include file="EF.Utility.CS.ttinclude"#><#@ 
+ output extension=".txt" encoding="utf-8" #><#
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+
+string inputFile = @"../DLog.Data/DLogDB.edmx";
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
+string namespaceName = code.VsNamespaceSuggestion();
+
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+WriteHeader(fileManager, namespaceName, code);
+
+
+	var sb=new  StringBuilder();
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+    fileManager.StartNewFile(entity.Name + ".cs");
+    BeginNamespace(namespaceName, code);	
+	
+	var summary = (entity.Documentation == null ? string.Empty : entity.Documentation.Summary);	
+#>
+/// <summary>
+/// <para>【DLogDB.Entity.tt生成的，与数据库对应的】</para>
+/// <#=summary#>
+<# 
+	if(entity.Documentation != null && !String.IsNullOrWhiteSpace(entity.Documentation.LongDescription)) 
+	{
+#>
+/// <remarks>
+/// <#=entity.Documentation.LongDescription.Replace("\r\n", "\r\n	/// ").Replace("\n", "\r\n	/// ")#>
+/// </remarks>
+<# 
+	}
+#>
+/// </summary>
+[Serializable]
+[DataContract(IsReference = true)]
+[MetadataType(typeof(<#=code.Escape(entity)#>Metadata))]
+<#=Accessibility.ForType(entity)#> <#=code.SpaceAfter(code.AbstractOption(entity))#>partial class <#=code.Escape(entity)#><#=code.StringBefore(" : ", code.Escape(entity.BaseType))#>
+{
+<#
+	var propertiesIsInt64WithUnpublicSetter = entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.TypeUsage.EdmType.Name == "Int64" && (!string.IsNullOrWhiteSpace(code.SpaceAfter(Accessibility.ForSetter(p)))) && (!p.Nullable));
+	var propertiesIsGuidWithUnpublicSetter = entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.TypeUsage.EdmType.Name == "Guid" && (!string.IsNullOrWhiteSpace(code.SpaceAfter(Accessibility.ForSetter(p)))) && (!p.Nullable));
+	var propertiesWithDefaultValues = entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.DefaultValue != null).Except(propertiesIsGuidWithUnpublicSetter).Except(propertiesIsInt64WithUnpublicSetter);
+    var collectionNavigationProperties = entity.NavigationProperties.Where(np => np.DeclaringType == entity && np.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many);
+    var complexProperties = entity.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == entity);
+
+    if (propertiesIsInt64WithUnpublicSetter.Any() || propertiesIsGuidWithUnpublicSetter.Any() || propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any())
+    {
+#>
+	/// <summary>
+	/// 创建<#=entity.Documentation == null ? "" : entity.Documentation.Summary#>新实例
+	/// </summary>
+    public <#=code.Escape(entity)#>()
+    {
+<#
+		foreach (EdmProperty edmProperty in propertiesIsInt64WithUnpublicSetter)
+        {
+#>
+
+        this.<#=code.Escape(edmProperty)#> = FileTimeUtcTicks.NewTicks<<#=code.Escape(entity)#>>(); 
+
+<#
+        }	
+		
+		foreach (var edmProperty in propertiesIsGuidWithUnpublicSetter)
+        {
+#>
+        this.<#=code.Escape(edmProperty)#> = Guid.NewGuid();
+<#
+        }
+		
+        foreach (EdmProperty edmProperty in propertiesWithDefaultValues)
+        {
+#>
+        this.<#=code.Escape(edmProperty)#> = <#=code.CreateLiteral(edmProperty.DefaultValue)#>; 
+<#
+        }
+
+        foreach (var navigationProperty in collectionNavigationProperties)
+        {
+#>
+        this.<#=code.Escape(navigationProperty)#> = new HashSet<<#=code.Escape(navigationProperty.ToEndMember.GetEntityType())#>>();
+<#
+        }
+
+        foreach (var complexProperty in complexProperties)
+        {
+#>
+        this.<#=code.Escape(complexProperty)#> = new <#=code.Escape(complexProperty.TypeUsage)#>();
+<#
+        }
+#>
+    }
+
+<#
+    }
+
+    var primitiveProperties = entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity);
+    if (primitiveProperties.Any())
+    {
+        foreach (EdmProperty edmProperty in primitiveProperties)
+        {
+            WriteProperty(code, edmProperty);
+        }
+    }
+
+    if (complexProperties.Any())
+    {
+#>
+
+<#
+        foreach(var complexProperty in complexProperties)
+        {
+            WriteProperty(code, complexProperty);
+        }
+    }
+
+    var navigationProperties = entity.NavigationProperties.Where(np => np.DeclaringType == entity);
+    if (navigationProperties.Any())
+    {
+#>
+
+<#
+        foreach (var navigationProperty in navigationProperties)
+        {
+            WriteNavigationProperty(code, navigationProperty);
+        }
+    }
+#>
+}
+
+<#
+    EndNamespace(namespaceName);
+}
+
+foreach (var complex in ItemCollection.GetItems<ComplexType>().OrderBy(e => e.Name))
+{
+    fileManager.StartNewFile(complex.Name + ".cs");
+    BeginNamespace(namespaceName, code);
+#>
+<#=Accessibility.ForType(complex)#> partial class <#=code.Escape(complex)#>
+{
+<#
+    var complexProperties = complex.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == complex);
+    var propertiesWithDefaultValues = complex.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == complex && p.DefaultValue != null);
+
+    if (propertiesWithDefaultValues.Any() || complexProperties.Any())
+    {
+#>
+    public <#=code.Escape(complex)#>()
+    {
+<#
+        foreach (var edmProperty in propertiesWithDefaultValues)
+        {
+#>
+        this.<#=code.Escape(edmProperty)#> = <#=code.CreateLiteral(edmProperty.DefaultValue)#>;
+<#
+        }
+
+        foreach (var complexProperty in complexProperties)
+        {
+#>
+        this.<#=code.Escape(complexProperty)#> = new <#=code.Escape(complexProperty.TypeUsage)#>();
+<#
+        }
+#>
+    }
+
+<#
+    }
+
+    var primitiveProperties = complex.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == complex);
+    if (primitiveProperties.Any())
+    {
+        foreach(var edmProperty in primitiveProperties)
+        {
+            WriteProperty(code, edmProperty);
+        }
+    }
+
+    if (complexProperties.Any())
+    {
+#>
+
+<#
+        foreach(var edmProperty in complexProperties)
+        {
+            WriteProperty(code, edmProperty);
+        }
+    }
+#>
+}
+
+<#
+    EndNamespace(namespaceName);
+}
+
+if (!VerifyTypesAreCaseInsensitiveUnique(ItemCollection))
+{
+    return "";
+}
+
+fileManager.Process();
+
+#>
+<#
+
+foreach (var entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+	var className=entity.Name;
+    var primitiveProperties = entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity);
+    if (primitiveProperties.Any())
+    {
+		sb.AppendFormat("\r\n\r\n[DebuggerDisplay(\"{0}:",className);
+        foreach(var edmProperty in primitiveProperties)
+        {
+          var propertyName=code.Escape(edmProperty);
+          sb.AppendFormat("{0}={{{0}}},",propertyName);
+        }
+		  sb.AppendFormat("\")]\r\npublic partial class {0} \r\n{{\r\n}}",className);
+    }
+}
+#>
+<#=sb#>
+<#+
+void WriteHeader(EntityFrameworkTemplateFileManager fileManager, string namespaceName,  CodeGenerationTools code)
+{
+    fileManager.StartHeader();
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     此代码是根据模板生成的。
+//
+//     对此文件的更改可能会导致不正确的行为，并且如果
+//     重新生成代码，则所做更改将丢失。
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using <#=code.EscapeNamespace(namespaceName)#>.Metadata;
+
+<#+
+    fileManager.EndBlock();
+}
+
+void BeginNamespace(string namespaceName, CodeGenerationTools code)
+{
+    CodeRegion region = new CodeRegion(this);
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+#>
+namespace <#=code.EscapeNamespace(namespaceName)#>
+{
+<#+
+        PushIndent(CodeRegion.GetIndent(1));
+    }
+}
+
+
+void EndNamespace(string namespaceName)
+{
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+        PopIndent();
+#>
+}
+<#+
+    }
+}
+
+
+
+void WriteProperty(CodeGenerationTools code, EdmProperty edmProperty)
+{
+    WriteProperty(Accessibility.ForProperty(edmProperty),
+                  code.Escape(edmProperty.TypeUsage),
+                  code.Escape(edmProperty),
+                  code.SpaceAfter(Accessibility.ForGetter(edmProperty)),
+                  code.SpaceAfter(Accessibility.ForSetter(edmProperty)),
+				  edmProperty.Documentation == null ? string.Empty : edmProperty.Documentation.Summary,
+				  edmProperty.Documentation == null ? string.Empty : edmProperty.Documentation.LongDescription
+	);
+}
+
+void WriteNavigationProperty(CodeGenerationTools code, NavigationProperty navigationProperty)
+{
+    var endType = code.Escape(navigationProperty.ToEndMember.GetEntityType());
+    WriteProperty(PropertyVirtualModifier(Accessibility.ForProperty(navigationProperty)),
+                  navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ICollection<" + endType + ">") : endType,
+                  code.Escape(navigationProperty),
+                  code.SpaceAfter(Accessibility.ForGetter(navigationProperty)),
+                  code.SpaceAfter(Accessibility.ForSetter(navigationProperty)),
+				  navigationProperty.Documentation == null ? string.Empty : navigationProperty.Documentation.Summary,
+				  navigationProperty.Documentation == null ? string.Empty : navigationProperty.Documentation.LongDescription,
+				  true
+	);
+}
+
+void WriteProperty(string accessibility, string type, string name, string getterAccessibility, string setterAccessibility, string summary, string description, bool isNav = false)
+{
+#>
+
+	/// <summary>
+    /// <#= (string.IsNullOrWhiteSpace(getterAccessibility) && string.IsNullOrWhiteSpace(setterAccessibility)) ? "獲取或設置" : (string.IsNullOrWhiteSpace(setterAccessibility) ? "設置" : "獲取") #><#=summary#><#=isNav ? "(導航屬性)" : ""#><#=(string.IsNullOrWhiteSpace(description) ? string.Empty : ("\r\n	/// <remarks>\r\n	/// " + description.Replace("\r\n", "\r\n		/// ").Replace("\n", "\r\n		/// ") + "\r\n	/// </remarks>"))#>
+	/// </summary><#=isNav ? "" : "\r\n    [DatabaseTableColumn]"#>
+    [DataMember]
+    <#=accessibility#> <#=type#> <#=name#> { <#=getterAccessibility #>get; <#+
+	 if(setterAccessibility.Length>0)
+	{
+	#>
+		<#=setterAccessibility#>set;
+	<#+
+	}else{#>set; <#+}	#>}
+<#+
+}
+
+string PropertyVirtualModifier(string accessibility)
+{
+    return accessibility + (accessibility != "private" ? " virtual" : "");
+}
+
+bool VerifyTypesAreCaseInsensitiveUnique(EdmItemCollection itemCollection)
+{
+    var alreadySeen = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+    foreach(var type in itemCollection.GetItems<StructuralType>())
+    {
+        if (!(type is EntityType || type is ComplexType))
+        {
+            continue;
+        }
+
+        if (alreadySeen.ContainsKey(type.FullName))
+        {
+            Error(String.Format(CultureInfo.CurrentCulture, "This template does not support types that differ only by case, the types {0} are not supported", type.FullName));
+            return false;
+        }
+        else
+        {
+            alreadySeen.Add(type.FullName, true);
+        }
+    }
+
+    return true;
+}
+#>

@@ -1,0 +1,11 @@
+﻿@model System.DateTime?
+@Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new
+{
+    @class = "date",
+    @data_val="true",
+    @data_val_date="",
+    @data_val_dateRange_format="dd/MM/yyyy", 
+    @data_val_dateRange_min = ViewData["min"] , 
+    @data_val_dateRange_max = ViewData["max"] , 
+    @data_val_dateRange = ViewData["msg"] , placeholder="dd/MM/yyyy"
+})

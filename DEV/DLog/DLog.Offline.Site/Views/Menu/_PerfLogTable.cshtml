@@ -1,0 +1,73 @@
+﻿@using Tmac.Frameworks.Common.Extends
+@using DLog.Entity
+@using DLog.Offline.Site.Models
+@using Webdiyer.WebControls.Mvc
+@model PagedList<PerfLog>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th class="nowrap">序号</th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThreadID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SystemCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MethodName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remark)
+        </th>
+    </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(Model.StartItemIndex + i++)</td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ID)*@
+                @Html.ActionLink(item.ID.ToString(), "PerfLogDetail", new { id = item.ID }, new { target = "_blank" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreadID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SystemCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MethodName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark)
+            </td>
+        </tr>
+    }
+</table>

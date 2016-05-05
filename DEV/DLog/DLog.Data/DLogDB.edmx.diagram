@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d62b1a5d4d64620be24692988e1f7ca" Name="Diagram1" ZoomLevel="90" >
+        <EntityTypeShape EntityType="DLogDBModel.ErrorLog" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DLogDBModel.PerfLog" Width="1.5" PointX="6" PointY="0.5" FillColor="Green" />
+        <EntityTypeShape EntityType="DLogDBModel.SearchInfo" Width="1.5" PointX="0.5" PointY="4.25" />
+        <EntityTypeShape EntityType="DLogDBModel.DebugLog" Width="1.5" PointX="2.75" PointY="0.5" />
+        <EntityTypeShape EntityType="DLogDBModel.CommonConfig" Width="1.5" PointX="2.75" PointY="4.25" />
+        <EntityTypeShape EntityType="DLogDBModel.PerfLogSearchInfo" Width="1.5" PointX="6" PointY="3.5" FillColor="Green" />
+        <EntityTypeShape EntityType="DLogDBModel.Resource" Width="1.5" PointX="8" PointY="0.5" FillColor="Green" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

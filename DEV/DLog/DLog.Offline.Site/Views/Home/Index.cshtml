@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>DLog后台管理</title>
+</head>
+<!--
+    frameset的属性:
+    rows,cols
+
+    frame的属性：
+    name:规定框架的名称
+    src:规定框架的文档url，可以是MVC的action
+    border:边框
+    scrolling:规定是否在框架内显示滚动条，yes,no,auto
+    noresize:规定无法调整框架的大小，noresize
+    <a href="/example/html/frame_a.html" target="showframe">Frame a</a>调用框架方法，指定target属性
+-->
+<frameset rows="60,*" border="1" framespacing="0">
+    <frame src='@Url.Action("Header")' name="HeaderFrame" frameborder="0" marginwidth="0" marginheight="0" noresize="noresize" scrolling="no" />
+    <frameset cols="180,*" border="1" framespacing="0">
+        <frame src='@Url.Action("Menu")' name="MenuFrame" frameborder="0" marginwidth="0" marginheight="0" />
+        <frame src='@Url.Action("Workspace")' name="WorkspaceFrame" frameborder="0" marginwidth="0" marginheight="0" />
+    </frameset>
+    @*<frame src='@Url.Action("Footer")' name="FooterFrame" frameborder="0" marginwidth="0" marginheight="0" noresize="noresize" scrolling="no" />*@
+    <noframes>
+        <body>
+            您的浏览器无法处理框架frame！
+        </body>
+    </noframes>
+</frameset>
+</html>

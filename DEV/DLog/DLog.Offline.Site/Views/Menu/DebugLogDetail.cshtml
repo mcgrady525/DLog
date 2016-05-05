@@ -1,0 +1,45 @@
+﻿@using Tmac.Frameworks.Common.Extends
+@using DLog.Entity
+@using DLog.Offline.Site.Models
+@using Webdiyer.WebControls.Mvc
+@model DebugLog
+@{
+    ViewBag.Title = "调试日志详情页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SystemCode</h2>
+@Html.DisplayFor(m => m.SystemCode)
+<h2>Source</h2>
+@Html.DisplayFor(m => m.Source)
+<h2>ThreadID</h2>
+@Html.DisplayFor(m => m.ThreadID)
+<h2>ThreadName</h2>
+@Html.DisplayFor(m => m.ThreadName)
+<h2>Message</h2>
+@Html.DisplayFor(m => m.Message)
+<h2>AppDomainName</h2>
+@Html.DisplayFor(m => m.AppDomainName)
+<h2>MachineName</h2>
+@Html.DisplayFor(m => m.MachineName)
+<h2>IpAddress</h2>
+@Html.DisplayFor(m => m.IpAddress)
+<h2>CreateTime</h2>
+@Html.DisplayFor(m => m.CreateTime)
+<h2>ProcessName</h2>
+@Html.DisplayFor(m => m.ProcessName)
+<h2>Detail</h2>
+<pre>
+@Html.Raw(DLog.Common.Helper.DLogHelper.UnCompress(Model.Detail))
+</pre>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+

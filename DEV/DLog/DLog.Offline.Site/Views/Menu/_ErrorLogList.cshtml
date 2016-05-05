@@ -1,0 +1,12 @@
+﻿@using Tmac.Frameworks.Common.Extends
+@using DLog.Entity
+@using DLog.Offline.Site.Models
+@using Webdiyer.WebControls.Mvc
+@model PagedList<ErrorLog>
+
+<div class="text-right">
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex", ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>" }).AjaxOptions(a => a.SetUpdateTargetId("errorLogs"))
+</div>
+@{ 
+    Html.RenderPartial("_ErrorLogTable"); 
+}

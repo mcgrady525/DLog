@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DLogDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DLogDBModelStoreContainer">
+    <EntitySet Name="ErrorLog" EntityType="DLogDBModel.Store.ErrorLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PerfLog" EntityType="DLogDBModel.Store.PerfLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SearchInfo" EntityType="DLogDBModel.Store.SearchInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DebugLog" EntityType="DLogDBModel.Store.DebugLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommonConfig" EntityType="DLogDBModel.Store.CommonConfig" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PerfLogSearchInfo" EntityType="DLogDBModel.Store.PerfLogSearchInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Resource" EntityType="DLogDBModel.Store.Resource" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="ErrorLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ThreadID" Type="int" Nullable="false" />
+    <Property Name="SystemCode" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Source" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="MachineName" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="AppDomainName" Type="nvarchar" Nullable="false" MaxLength="1024" />
+    <Property Name="ProcessID" Type="int" Nullable="false" />
+    <Property Name="ProcessName" Type="nvarchar" Nullable="false" MaxLength="1024" />
+    <Property Name="ThreadName" Type="nvarchar" Nullable="true" MaxLength="1024" />
+    <Property Name="Detail" Type="varbinary(max)" Nullable="true" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="IpAddress" Type="nvarchar" Nullable="true" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="PerfLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ThreadID" Type="int" Nullable="false" />
+    <Property Name="SystemCode" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Source" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="ClassName" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="MethodName" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Duration" Type="bigint" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MachineName" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SearchInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SystemCode" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Source" Type="nvarchar" Nullable="false" MaxLength="64" />
+  </EntityType>
+  <EntityType Name="DebugLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ThreadID" Type="int" Nullable="false" />
+    <Property Name="SystemCode" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Source" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="MachineName" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="AppDomainName" Type="nvarchar" Nullable="false" MaxLength="1024" />
+    <Property Name="ProcessID" Type="int" Nullable="false" />
+    <Property Name="ProcessName" Type="nvarchar" Nullable="false" MaxLength="1024" />
+    <Property Name="ThreadName" Type="nvarchar" Nullable="true" MaxLength="1024" />
+    <Property Name="Detail" Type="varbinary(max)" Nullable="true" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="IpAddress" Type="nvarchar" Nullable="true" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="CommonConfig">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastUpdateTime" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdateUser" Type="nvarchar" Nullable="false" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="PerfLogSearchInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SystemCode" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Source" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="ClassName" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="MethodName" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Resource">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DLogDBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="DLogDB" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="ErrorLog" EntityType="DLogDBModel.ErrorLog" />
+          <EntitySet Name="PerfLog" EntityType="DLogDBModel.PerfLog" />
+          <EntitySet Name="SearchInfo" EntityType="DLogDBModel.SearchInfo" />
+          <EntitySet Name="DebugLog" EntityType="DLogDBModel.DebugLog" />
+          <EntitySet Name="CommonConfig" EntityType="DLogDBModel.CommonConfig" />
+          <EntitySet Name="PerfLogSearchInfo" EntityType="DLogDBModel.PerfLogSearchInfo" />
+          <EntitySet Name="Resource" EntityType="DLogDBModel.Resource" />
+        </EntityContainer>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="ThreadID" Type="Int32" Nullable="false" />
+          <Property Name="SystemCode" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="512" />
+          <Property Name="MachineName" Type="String" Nullable="true" MaxLength="64" />
+          <Property Name="AppDomainName" Type="String" Nullable="false" MaxLength="1024" />
+          <Property Name="ProcessID" Type="Int32" Nullable="false" />
+          <Property Name="ProcessName" Type="String" Nullable="false" MaxLength="1024" />
+          <Property Name="ThreadName" Type="String" Nullable="true" MaxLength="1024" />
+          <Property Name="Detail" Type="Binary" Nullable="true" MaxLength="Max" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+          <Property Name="IpAddress" Type="String" Nullable="true" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="PerfLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="ThreadID" Type="Int32" Nullable="false" />
+          <Property Name="SystemCode" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="MethodName" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Duration" Type="Int64" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="1073741823" />
+          <Property Name="MachineName" Type="String" Nullable="true" MaxLength="64" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SearchInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="SystemCode" Type="String" MaxLength="64" Nullable="false" />
+          <Property Name="Source" Type="String" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DebugLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="ThreadID" Type="Int32" Nullable="false" />
+          <Property Name="SystemCode" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="512" />
+          <Property Name="MachineName" Type="String" Nullable="true" MaxLength="64" />
+          <Property Name="AppDomainName" Type="String" Nullable="false" MaxLength="1024" />
+          <Property Name="ProcessID" Type="Int32" Nullable="false" />
+          <Property Name="ProcessName" Type="String" Nullable="false" MaxLength="1024" />
+          <Property Name="ThreadName" Type="String" Nullable="true" MaxLength="1024" />
+          <Property Name="Detail" Type="Binary" Nullable="true" MaxLength="Max" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+          <Property Name="IpAddress" Type="String" Nullable="true" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="CommonConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Content" Type="String" Nullable="true" MaxLength="1073741823" />
+          <Property Name="LastUpdateTime" Type="DateTime" Nullable="false" />
+          <Property Name="LastUpdateUser" Type="String" Nullable="false" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="PerfLogSearchInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="SystemCode" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="256" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="MethodName" Type="String" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DLogDBModelStoreContainer" CdmEntityContainer="DLogDB">
+    <EntitySetMapping Name="ErrorLog">
+      <EntityTypeMapping TypeName="IsTypeOf(DLogDBModel.ErrorLog)">
+        <MappingFragment StoreEntitySet="ErrorLog">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ThreadID" ColumnName="ThreadID" />
+          <ScalarProperty Name="SystemCode" ColumnName="SystemCode" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+          <ScalarProperty Name="AppDomainName" ColumnName="AppDomainName" />
+          <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+          <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+          <ScalarProperty Name="ThreadName" ColumnName="ThreadName" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerfLog">
+      <EntityTypeMapping TypeName="IsTypeOf(DLogDBModel.PerfLog)">
+        <MappingFragment StoreEntitySet="PerfLog">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ThreadID" ColumnName="ThreadID" />
+          <ScalarProperty Name="SystemCode" ColumnName="SystemCode" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SearchInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DLogDBModel.SearchInfo)">
+        <MappingFragment StoreEntitySet="SearchInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SystemCode" ColumnName="SystemCode" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DebugLog">
+      <EntityTypeMapping TypeName="IsTypeOf(DLogDBModel.DebugLog)">
+        <MappingFragment StoreEntitySet="DebugLog">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ThreadID" ColumnName="ThreadID" />
+          <ScalarProperty Name="SystemCode" ColumnName="SystemCode" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+          <ScalarProperty Name="AppDomainName" ColumnName="AppDomainName" />
+          <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+          <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+          <ScalarProperty Name="ThreadName" ColumnName="ThreadName" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommonConfig">
+      <EntityTypeMapping TypeName="IsTypeOf(DLogDBModel.CommonConfig)">
+        <MappingFragment StoreEntitySet="CommonConfig">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+          <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerfLogSearchInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DLogDBModel.PerfLogSearchInfo)">
+        <MappingFragment StoreEntitySet="PerfLogSearchInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SystemCode" ColumnName="SystemCode" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource">
+      <EntityTypeMapping TypeName="IsTypeOf(DLogDBModel.Resource)">
+        <MappingFragment StoreEntitySet="Resource">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="False" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <edmx:DesignerProperty Name="DatabaseGenerationWorkflow" Value="$(VSEFTools)\DBGen\TablePerTypeStrategy - 副本.xaml" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

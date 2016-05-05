@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="bae391b9-719b-48a2-ae0d-c93240e2bee1" name="DLog架构图" linkedPackageId="9121f994-6ebe-43e9-b56b-b945d6a4f779" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="0ce51103-f448-423a-ab95-48c38e7bbc2f">
+      <elementDefinition Id="3cb76b84-d26c-42a7-8efa-67c581dd59e2" />
+      <body>EF,Model First</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="93a43307-ec56-4c53-9ae1-10b6641eeb13" LastKnownName="Data" />
+      </annotatedElements>
+    </comment>
+    <comment Id="b431cfac-4bc5-490c-99f8-711aa0d1a050">
+      <elementDefinition Id="1c4c0b3f-1f92-4327-a00d-06f337185c4d" />
+      <body>Web API</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="7301513c-59a1-4959-85b7-78cb1bde8331" LastKnownName="OpenAPI" />
+      </annotatedElements>
+    </comment>
+    <comment Id="d033ee3d-a2ea-40fa-ae65-fb0c1ec6b702">
+      <elementDefinition Id="0ffd90b1-a1c8-4ddc-89ad-63e2cc81ce3f" />
+      <body>MVC</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="bf1d909f-a4a8-4c0c-8332-d9b572539f99" LastKnownName="Offline" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="b63f4d4c-6b59-4198-9036-a801e38a1694">
+      <profileInstance Id="1b58a497-8683-4d54-b52b-912711f4c31a" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="3fbb3963-840a-4421-8ed8-acad2b623783">
+      <profileInstance Id="6de7b785-22e8-4f28-835c-8a4c8931a68e" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="a73a0fac-69bb-4572-be08-ac4381b9dcd3" name="DLog架构图" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="60a3ab2d-482f-4e16-8015-26954cefe7ca" />
+        <nodes>
+          <opaqueAction Id="93a43307-ec56-4c53-9ae1-10b6641eeb13" name="Data" isLeaf="false">
+            <elementDefinition Id="895cdf7e-5689-4ad1-83ee-b22ce8ab1eee" />
+          </opaqueAction>
+          <opaqueAction Id="7288f4df-b7c2-4840-8c0f-dec9c6231d31" name="WCF BIZ" isLeaf="false">
+            <elementDefinition Id="14f74122-dc79-4cc9-b358-33b995b93d73" />
+            <flowNodeTargets>
+              <controlFlow Id="a0af556d-65bf-4b5c-ab58-91a180a14b58" isLeaf="false">
+                <opaqueActionMoniker Id="93a43307-ec56-4c53-9ae1-10b6641eeb13" LastKnownName="Data" />
+                <elementDefinition Id="19c7c21a-bcff-4ae5-878f-97f4e728f80a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="7301513c-59a1-4959-85b7-78cb1bde8331" name="OpenAPI" isLeaf="false">
+            <elementDefinition Id="a9c7ffad-f42e-4668-9f26-ef5614c1851e" />
+            <flowNodeTargets>
+              <controlFlow Id="89ee3f6b-52ea-47d7-8ee3-4db76ae01004" isLeaf="false">
+                <opaqueActionMoniker Id="7288f4df-b7c2-4840-8c0f-dec9c6231d31" LastKnownName="WCF BIZ" />
+                <elementDefinition Id="edbbd212-d800-44e5-b22c-a536127e6ee7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="bf1d909f-a4a8-4c0c-8332-d9b572539f99" name="Offline" isLeaf="false">
+            <elementDefinition Id="2409e61c-2a66-40c1-ae5a-0dac52540a84" />
+            <flowNodeTargets>
+              <controlFlow Id="c32cb764-2261-4fbb-ba2b-fe6715680c77" isLeaf="false">
+                <opaqueActionMoniker Id="7288f4df-b7c2-4840-8c0f-dec9c6231d31" LastKnownName="WCF BIZ" />
+                <elementDefinition Id="7e3111ae-1e89-40bd-8d6a-20e84a59edb7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="4e666c96-980f-4ba2-bb5b-ed042da4891d" name="Entity" isLeaf="false">
+            <elementDefinition Id="0c436f72-2146-417c-a8dc-42e78e148509" />
+          </opaqueAction>
+          <opaqueAction Id="b558d716-2669-432c-9863-f7433f8a1965" name="Common" isLeaf="false">
+            <elementDefinition Id="5d2a7821-9c39-4ff8-b246-46a0fcbd8e56" />
+          </opaqueAction>
+          <opaqueAction Id="750c6ae2-a2ee-4f85-a336-9a852d80e398" name="Cache" isLeaf="false">
+            <elementDefinition Id="33d69a60-eeef-4d7e-88eb-948e966c5afa" />
+          </opaqueAction>
+          <opaqueAction Id="dba5efab-99f8-48b1-a931-f04375b87234" name="Session" isLeaf="false">
+            <elementDefinition Id="aa1f01fb-2f44-46eb-8e17-cb6a241634b5" />
+          </opaqueAction>
+          <opaqueAction Id="aa55c0b8-1f9a-4678-a64b-90d7266b325a" name="Log" isLeaf="false">
+            <elementDefinition Id="2b36a7af-fe7f-40f6-8b41-0f6e23e88731" />
+          </opaqueAction>
+          <opaqueAction Id="fb97f6f7-b8cf-4c77-9e80-882fddebde9f" name="序列化" isLeaf="false">
+            <elementDefinition Id="e2f84cd4-fece-46e3-be11-11a7a2b197b0" />
+          </opaqueAction>
+          <opaqueAction Id="15773ae4-0547-4964-953d-b6ea9143d5ff" name="Config" isLeaf="false">
+            <elementDefinition Id="bfc3ed7d-948c-49b5-ad61-2dec784672c8" />
+          </opaqueAction>
+          <opaqueAction Id="83230505-c260-4a21-800b-dba1403a2acf" name="Exception" isLeaf="false">
+            <elementDefinition Id="f03b069e-9765-40f9-be87-65c348e27db8" />
+          </opaqueAction>
+          <opaqueAction Id="6b1e3b70-da80-471e-a7bf-c89993a0fd17" name="Scheduler" isLeaf="false">
+            <elementDefinition Id="7807d9b0-f15c-4760-988e-a8538e90cd2c" />
+          </opaqueAction>
+          <opaqueAction Id="1b7294d6-eb46-4437-ba86-2ad405cfc3ce" name="ABS" isLeaf="false">
+            <elementDefinition Id="66410b83-e8e5-404a-a561-8ecc2b3a985d" />
+            <flowNodeTargets>
+              <controlFlow Id="839edffd-db7c-4225-b8b8-ed4824b2a6f4" isLeaf="false">
+                <opaqueActionMoniker Id="7301513c-59a1-4959-85b7-78cb1bde8331" LastKnownName="OpenAPI" />
+                <elementDefinition Id="a8ff2940-e42b-4aa1-9fff-f11894edae28" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="42dd06ef-6b79-4bd9-95b3-9461b08e26ad" name="HBS" isLeaf="false">
+            <elementDefinition Id="c9289689-c923-454f-b341-96912146d7e9" />
+            <flowNodeTargets>
+              <controlFlow Id="538fbf15-e492-426a-a44b-0b6efd9c8ad2" isLeaf="false">
+                <opaqueActionMoniker Id="7301513c-59a1-4959-85b7-78cb1bde8331" LastKnownName="OpenAPI" />
+                <elementDefinition Id="d7c68f87-dc2e-4966-939c-6d1a82a596b9" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="9121f994-6ebe-43e9-b56b-b945d6a4f779" name="DLog.UML">
+    <elementDefinition Id="5b21c6da-a733-4651-9af4-d4ea3da00539" />
+  </package>
+</activityRootModel>

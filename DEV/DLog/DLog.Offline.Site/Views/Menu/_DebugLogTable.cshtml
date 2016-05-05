@@ -1,0 +1,73 @@
+﻿@using Tmac.Frameworks.Common.Extends
+@using DLog.Entity
+@using DLog.Offline.Site.Models
+@using Webdiyer.WebControls.Mvc
+@model PagedList<DebugLog>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th class="nowrap">序号</th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SystemCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MachineName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppDomainName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IpAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessName)
+        </th>
+    </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(Model.StartItemIndex + i++)</td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ID)*@
+                @Html.ActionLink(item.ID.ToString(), "DebugLogDetail", new { id = item.ID }, new { target = "_blank" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SystemCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MachineName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppDomainName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IpAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProcessName)
+            </td>
+        </tr>
+    }
+</table>

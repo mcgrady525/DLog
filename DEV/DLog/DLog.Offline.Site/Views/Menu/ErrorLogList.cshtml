@@ -1,0 +1,93 @@
+﻿@using Tmac.Frameworks.Common.Extends
+@using DLog.Entity
+@using DLog.Offline.Site.Models
+@using Webdiyer.WebControls.Mvc
+@model ErrorLogListModel
+
+@{
+    ViewBag.Title = "错误日志列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section HeaderLink
+{
+
+}
+
+<div class="workspace-wrapper">
+    <!--查询form-->
+    <!--总计，数-->
+    <!--列表-->
+    <div>
+        @using (Html.BeginForm("ErrorLogList", "Menu", FormMethod.Post, new { id = "frmErrorLogList" }))
+        {
+            <table class="tbCondition" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.Request.StartTime):</td>
+                    <td>@Html.EditorFor(m => m.Request.StartTime, new { onfocus = "WdatePicker({skin:'wingon',dateFmt: 'yyyy/MM/dd HH:mm:ss',onpicked:function(){Request_EndTime.focus();}})" })</td>
+                    <td>@Html.DisplayNameFor(m => m.Request.EndTime):</td>
+                    <td>@Html.EditorFor(m => m.Request.EndTime, new { onfocus = "WdatePicker({skin:'wingon',dateFmt: 'yyyy/MM/dd HH:mm:ss',minDate:'#F{$dp.$D(\\'Request_StartTime\\',{d:0})}'})" })</td>
+                    <td>@Html.DisplayNameFor(m => m.Request.ID):</td>
+                    <td>@Html.EditorFor(m => m.Request.ID)</td>
+                    <td>@Html.DisplayNameFor(m => m.Request.SystemCode):</td>
+                    <td>@Html.EditorFor(m => m.Request.SystemCode)</td>
+                    <td>@Html.DisplayNameFor(m => m.Request.Source):</td>
+                    <td>@Html.EditorFor(m => m.Request.Source)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.Request.AppDomainName):</td>
+                    <td>@Html.EditorFor(m => m.Request.AppDomainName)</td>
+                    <td>@Html.DisplayNameFor(m => m.Request.MachineName):</td>
+                    <td>@Html.EditorFor(m => m.Request.MachineName)</td>
+                    <td>@Html.DisplayNameFor(m => m.Request.IpAddress):</td>
+                    <td>@Html.EditorFor(m => m.Request.IpAddress)</td>
+                    <td>@Html.DisplayNameFor(m => m.Request.Message):</td>
+                    <td>@Html.EditorFor(m => m.Request.Message)</td>
+                    <td>@Html.DisplayNameFor(m => m.Request.ProcessName):</td>
+                    <td>@Html.EditorFor(m => m.Request.ProcessName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.Request.Detail):</td>
+                    <td>@Html.EditorFor(m => m.Request.Detail)</td>
+                </tr>
+            </table>
+            <div class="btnSubmit">
+                <input type="submit" value="查 询" id="btnSearch" onclick="return CheckInput();" />
+            </div>
+        }
+    </div>
+    @if (Model.QueryResult.Count > 0)
+    {
+        <div style="float: right;">總計 @Model.QueryResult.TotalItemCount 條,每頁顯示20條 </div>
+        <div style="clear: both;"></div>
+    }
+    <div id="errorLogs">
+        @Html.Partial("_ErrorLogList", Model.QueryResult)
+    </div>
+</div>
+
+<!--加上，为了jquery的智能提示-->
+@if (false)
+{
+    <script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+}
+
+@section FooterScript
+{
+    <script type="text/javascript">
+        $(function () {
+            $(".pagination a[disabled!='disabled']").click(function () {
+                $("#frmErrorLogList")[0].action = $(this).attr("href");
+                $(this).attr("href", "###");
+                $("#frmErrorLogList")[0].submit();
+            });
+
+        });
+
+        //输入校验
+        function CheckInput() {
+
+            return true;
+        }
+
+    </script>
+}

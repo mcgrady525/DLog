@@ -1,0 +1,29 @@
+﻿@using Tmac.Frameworks.Common.Extends
+@using DLog.Entity
+@using DLog.Offline.Site.Models
+@using Webdiyer.WebControls.Mvc
+@model PerfLog
+@{
+    ViewBag.Title = "性能日志详情页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>SystemCode</h2>
+@Html.DisplayFor(m => m.SystemCode)
+<h2>Source</h2>
+@Html.DisplayFor(m => m.Source)
+<h2>ThreadID</h2>
+@Html.DisplayFor(m => m.ThreadID)
+<h2>ClassName</h2>
+@Html.DisplayFor(m => m.ClassName)
+<h2>MethodName</h2>
+@Html.DisplayFor(m => m.MethodName)
+<h2>Duration</h2>
+@Html.DisplayFor(m => m.Duration)
+<h2>Remark</h2>
+@Html.DisplayFor(m => m.Remark)
+<h2>MachineName</h2>
+@Html.DisplayFor(m => m.MachineName)
+<h2>CreateTime</h2>
+@Model.CreateTime
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+

@@ -1,0 +1,324 @@
+﻿<# 
+//---------------------------------------------------------------------
+// <copyright file="SsdlToSql10.tt" company="Microsoft">
+//      Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//---------------------------------------------------------------------
+// This T4 template generates T-SQL from an instance of 
+// System.Data.Metadata.Edm.StoreItemCollection, an object representation
+// of the SSDL. This T-SQL is compatible with SQL 2008, 2005, CE, and Azure databases.
+//---------------------------------------------------------------------
+// Note: We will resolve all paths in assembly directives at runtime, taking 
+// macros into account (e.g. $(DevEnvDir), $(ProjectDir), etc.)
+#>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="System" #>
+<#@ assembly name="EntityFramework" #>
+<#@ assembly name="EntityFramework.SqlServer" #>
+<#@ assembly name="EntityFramework.SqlServerCompact" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@ assembly name="$(DevEnvDir)Microsoft.Data.Entity.Design.DatabaseGeneration.dll"#>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.Entity.Design" #>
+<#@ import namespace="System.Data.Entity.Core.Metadata.Edm" #>
+<#@ import namespace="Microsoft.Data.Entity.Design.DatabaseGeneration" #>
+<#@ import namespace="System.Runtime.Remoting.Messaging" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Xml" #>
+<#@ template language="C#" debug="true" hostspecific="true" #>
+<#@ include file="GenerateTSQL.Utility.ttinclude"#>
+<#@ output extension = ".sql" #>
+<#
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+// Setup for the template (initializing variables, etc.)
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+
+    string databaseName = this.GetInput<string>(EdmParameterBag.ParameterName.DatabaseName.ToString());
+    string edmxPath = this.GetInput<string>(EdmParameterBag.ParameterName.EdmxPath.ToString());
+    Version targetVersion = this.GetInput<Version>(EdmParameterBag.ParameterName.TargetVersion.ToString());
+    
+    if (false == InitializeAndValidateExistingStore()) 
+    {
+#>
+-- Warning: There were errors validating the existing SSDL. Drop statements
+-- will not be generated.
+<#
+    }
+#>
+-- --------------------------------------------------
+<#
+    if (this.IsSQLCE) {
+#>
+-- Entity Designer DDL Script for SQL Server Compact Edition
+<#
+    } else {
+#>
+-- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
+<#
+    }
+#>
+-- --------------------------------------------------
+-- Date Created: <#=DateTime.Now#>
+<#
+    if (!String.IsNullOrEmpty(edmxPath))
+    {
+#>
+-- Generated from EDMX file: <#=Id(edmxPath)#>
+<#
+    }
+#>
+-- --------------------------------------------------
+
+<#  if (!this.IsSQLCE) 
+    { 
+#>
+SET QUOTED_IDENTIFIER OFF;
+GO
+<#  if (!String.IsNullOrEmpty(databaseName))
+    {
+#>
+USE [<#=Id(databaseName)#>];
+GO
+<#
+    }
+    foreach (string unescapedSchemaName in (from es in Store.GetAllEntitySets() select es.GetSchemaName()).Distinct())
+    {
+#>
+IF SCHEMA_ID(N'<#=Lit(unescapedSchemaName)#>') IS NULL EXECUTE(N'CREATE SCHEMA [<#=Id(unescapedSchemaName)#>]');
+<#
+    }
+#>
+GO
+<#  } #>
+
+-- --------------------------------------------------
+-- Dropping existing FOREIGN KEY constraints
+<#  if (this.IsSQLCE)
+    {
+#>
+-- NOTE: if the constraint does not exist, an ignorable error will be reported.
+<#  } #>
+-- --------------------------------------------------
+
+<#
+    foreach (AssociationSet associationSet in ExistingStore.GetAllAssociationSets())
+    {
+        ReferentialConstraint constraint = associationSet.ElementType.ReferentialConstraints.Single();
+        string constraintName = Id(WriteFKConstraintName(constraint));
+        AssociationSetEnd dependentSetEnd = associationSet.AssociationSetEnds.Where(ase => ase.CorrespondingAssociationEndMember == constraint.ToRole).Single();
+        string schemaName = Id(dependentSetEnd.EntitySet.GetSchemaName());
+        string dependentTableName = Id(dependentSetEnd.EntitySet.GetTableName());
+        
+        if (!this.IsSQLCE)
+        {
+#>
+IF OBJECT_ID(N'[<#=Lit(schemaName)#>].[<#=Lit(constraintName)#>]', 'F') IS NOT NULL
+<#      } #>
+    ALTER TABLE <# if (!IsSQLCE) {#>[<#=schemaName#>].<#}#>[<#=dependentTableName#>] DROP CONSTRAINT [<#=constraintName#>];
+GO
+<#
+    }
+#>
+
+-- --------------------------------------------------
+-- Dropping existing tables
+<#  if (this.IsSQLCE)
+    {
+#>
+-- NOTE: if the table does not exist, an ignorable error will be reported.
+<#  } #>
+-- --------------------------------------------------
+
+<#
+    foreach (EntitySet entitySet in ExistingStore.GetAllEntitySets())
+    { 
+        string schemaName = Id(entitySet.GetSchemaName());
+        string tableName = Id(entitySet.GetTableName());
+        
+        if (!this.IsSQLCE)
+        {
+#>
+IF OBJECT_ID(N'[<#=Lit(schemaName)#>].[<#=Lit(tableName)#>]', 'U') IS NOT NULL
+<#      } #>
+    DROP TABLE <# if (!IsSQLCE) {#>[<#=schemaName#>].<#}#>[<#=tableName#>];
+GO
+<#
+    }
+#>
+
+-- --------------------------------------------------
+-- Creating all tables
+-- --------------------------------------------------
+
+<#
+    foreach (EntitySet entitySet in Store.GetAllEntitySets())
+    {
+        string schemaName = Id(entitySet.GetSchemaName());
+        string tableName = Id(entitySet.GetTableName());
+#>
+-- Creating table '<#=tableName#>'
+CREATE TABLE <# if (!IsSQLCE) {#>[<#=schemaName#>].<#}#>[<#=tableName#>] (
+<#
+        for (int p = 0; p < entitySet.ElementType.Properties.Count; p++)
+        {
+            EdmProperty prop = entitySet.ElementType.Properties[p];
+#>
+    [<#=Id(prop.Name)#>] <#=prop.ToStoreType()#> <#=WriteIdentity(prop, targetVersion)#> <#=WriteNullable(prop.Nullable)#><#=(p < entitySet.ElementType.Properties.Count - 1) ? "," : ""#>
+<#
+        }
+#>
+);
+GO
+
+<# 
+    } 
+#>
+-- --------------------------------------------------
+-- Creating all PRIMARY KEY constraints
+-- --------------------------------------------------
+
+<#
+    foreach (EntitySet entitySet in Store.GetAllEntitySets())
+    {
+        string schemaName = Id(entitySet.GetSchemaName());
+        string tableName = Id(entitySet.GetTableName());
+#>
+-- Creating primary key on <#=WriteColumns(entitySet.ElementType.GetKeyProperties(), ',')#> in table '<#=tableName#>'
+ALTER TABLE <# if (!IsSQLCE) {#>[<#=schemaName#>].<#}#>[<#=tableName#>]
+ADD CONSTRAINT [PK_<#=tableName#>]
+    PRIMARY KEY <# if (!IsSQLCE) {#><#=WriteClustered(Store, entitySet.ElementType)#> <#}#>(<#=WriteColumns(entitySet.ElementType.GetKeyProperties(), ',')#> <# if (!IsSQLCE) {#>ASC<#}#>);
+GO
+
+<#
+    }
+#>
+
+
+
+
+
+
+
+
+-- --------------------------------------------------
+-- Creating all Property by http://www.yongfa365.com/
+-- --------------------------------------------------
+<#
+    var listDocs = new List<MyDoc>();
+    XDocument doc = XDocument.Load(edmxPath);
+    XNamespace edmx = "http://schemas.microsoft.com/ado/2008/10/edmx";
+    XNamespace schema = "http://schemas.microsoft.com/ado/2008/09/edm";
+    foreach (var entityType in doc.Root.Element(edmx + "Runtime").Element(edmx + "ConceptualModels").Element(schema + "Schema").Elements(schema + "EntityType"))
+    {
+        //Get Table's Documentation
+        var tableName = entityType.Attribute("Name").Value;
+        var rootDoc = new MyDoc { TableName = tableName, Children = new List<MyDoc>() };
+        //File.AppendAllText("C:\\1.log", rootDoc.TableName + "\r\n");
+
+        var docTable = entityType.Element(schema + "Documentation");
+        if (docTable != null)
+        {
+            rootDoc.Summary = docTable.Element(schema + "Summary") != null ? docTable.Element(schema + "Summary").Value : null;
+            rootDoc.LongDescription = docTable.Element(schema + "LongDescription") != null ? docTable.Element(schema + "LongDescription").Value : null;
+        }
+
+        //Get Table.Field's Documentation
+        foreach (var prop in entityType.Elements(schema + "Property"))
+        {
+            var fieldName = prop.Attribute("Name").Value;
+            var childDOC = new MyDoc { TableName = tableName, FieldName = fieldName };
+            var docField = prop.Element(schema + "Documentation");
+            if (docField != null)
+            {
+                childDOC.Summary = docField.Element(schema + "Summary") != null ? docField.Element(schema + "Summary").Value : null;
+                childDOC.LongDescription = docField.Element(schema + "LongDescription") != null ? docField.Element(schema + "LongDescription").Value : null;
+
+                rootDoc.Children.Add(childDOC);
+            }
+        }
+
+        listDocs.Add(rootDoc);
+    }
+#>
+
+<#
+    foreach (EntitySet entitySet in Store.GetAllEntitySets())
+    {
+        string schemaName = Id(entitySet.GetSchemaName());
+        string tableName = Id(entitySet.GetTableName());
+#>
+------  table '<#=tableName#>'
+
+<#
+            try
+            {
+		string tableSummary =listDocs.Find(s => s.TableName.Substring(2) == tableName).Summary;
+		if(tableSummary != null)
+		{
+#>
+--EXEC sys.sp_dropextendedproperty @name=N'MS_Description', @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'<#=tableName#>'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'<#=tableSummary#>' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'<#=tableName#>'
+GO
+<#
+		}
+	    } catch {}
+#>
+
+
+<#
+        for (int p = 0; p < entitySet.ElementType.Properties.Count; p++)
+        {
+            try
+            {
+                var prop = entitySet.ElementType.Properties[p];
+		var fieldName =prop.Name;
+		var summary = listDocs.Find(s => s.TableName.Substring(2) == tableName).Children.Find(f => f.FieldName == fieldName).Summary;
+		if(summary != null)
+		{
+#>
+--EXEC sys.sp_dropextendedproperty @name=N'MS_Description', @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'<#=tableName#>', @level2type=N'COLUMN',@level2name=N'<#=fieldName#>'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'<#=summary#>' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'<#=tableName#>', @level2type=N'COLUMN',@level2name=N'<#=fieldName#>'
+GO
+
+<#
+		}
+	    } catch {}
+        }
+}
+#>
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------
+
+
+<#+
+    /// <summary>
+	/// Write NONCLUSTERED if the given EntityType is inferred to be a join table
+	/// </summary>
+	private static string WriteClustered(StoreItemCollection store, EntityType entityType)
+	{
+	    if (entityType.IsJoinTable(store))
+	    {
+	        return "NONCLUSTERED";
+	    }
+	    return "CLUSTERED";
+	}
+
+        class MyDoc
+        {
+            public string TableName { get; set; }
+            public string FieldName { get; set; }
+            public string Summary { get; set; }
+            public string LongDescription { get; set; }
+            public List<MyDoc> Children { get; set; }
+        }
+#>

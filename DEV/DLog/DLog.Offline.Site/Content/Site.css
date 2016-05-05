@@ -1,0 +1,25 @@
+﻿body {
+}
+
+/* ##### Workspace.Form ##### */
+input[type="text"],
+input[type="datetime"],
+input[type="number"]
+{
+    width:150px;
+    height:25px;
+}
+
+.workspace-wrapper {
+    margin-top:10px;
+    margin-right:10px;
+    margin-left:10px;
+}
+
+.tbCondition {
+    table-layout:fixed;
+    line-height:2em;
+}
+.btnSubmit {
+    text-align:center;
+}

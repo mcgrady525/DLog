@@ -1,0 +1,78 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="GenerateDatabaseScriptWorkflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mdedda="clr-namespace:Microsoft.Data.Entity.Design.DatabaseGeneration.Activities;assembly=Microsoft.Data.Entity.Design.DatabaseGeneration"
+ xmlns:mdedda1="clr-namespace:Microsoft.Data.Entity.Design.DatabaseGeneration.Activities;assembly=Microsoft.Data.Entity.Design"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sdme="clr-namespace:System.Data.Metadata.Edm;assembly=System.Data.Entity"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Csdl" Type="InArgument(sdme:EdmItemCollection)" />
+    <x:Property Name="ExistingSsdl" Type="InArgument(x:String)" />
+    <x:Property Name="ExistingMsl" Type="InArgument(x:String)" />
+    <x:Property Name="Ssdl" Type="OutArgument(x:String)" />
+    <x:Property Name="Msl" Type="OutArgument(x:String)" />
+    <x:Property Name="Ddl" Type="OutArgument(x:String)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>GenerateDatabaseScriptWorkflow_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Editor</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.LanguageService</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.VisualBasic.LanguageService</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <mdedda:CsdlToSsdlAndMslActivity CsdlInput="[Csdl]" sap2010:WorkflowViewState.IdRef="CsdlToSsdlAndMslActivity_1" MslOutput="[Msl]" MslOutputGeneratorType="Microsoft.Data.Entity.Design.DatabaseGeneration.OutputGenerators.CsdlToMsl, Microsoft.Data.Entity.Design.DatabaseGeneration" OutputGeneratorType="Microsoft.Data.Entity.Design.DatabaseGeneration.OutputGenerators.CsdlToSsdl, Microsoft.Data.Entity.Design.DatabaseGeneration" SsdlOutput="[Ssdl]" />
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[Ssdl]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">[Ssdl.Replace("&lt;/Schema&gt;", "        &lt;Function Name=""ContainsAll"" ReturnType=""bit"" Aggregate=""false"" BuiltIn=""false"" NiladicFunction=""false"" IsComposable=""true"" ParameterTypeSemantics=""AllowImplicitConversion"" Schema=""dbo""&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""input"" Type=""nvarchar(max)"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""search"" Type=""nvarchar"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "        &lt;/Function&gt;" &amp; vbNewLine &amp; "        &lt;Function Name=""ContainsAny"" ReturnType=""bit"" Aggregate=""false"" BuiltIn=""false"" NiladicFunction=""false"" IsComposable=""true"" ParameterTypeSemantics=""AllowImplicitConversion"" Schema=""dbo""&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""input"" Type=""nvarchar(max)"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""search"" Type=""nvarchar"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "        &lt;/Function&gt;" &amp; vbNewLine &amp; "        &lt;Function Name=""ContainsOne"" ReturnType=""bit"" Aggregate=""false"" BuiltIn=""false"" NiladicFunction=""false"" IsComposable=""true"" ParameterTypeSemantics=""AllowImplicitConversion"" Schema=""dbo""&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""input"" Type=""nvarchar(max)"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""search"" Type=""nvarchar"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "        &lt;/Function&gt;" &amp; vbNewLine &amp; "        &lt;Function Name=""GetDateTimeString"" ReturnType=""nvarchar"" Aggregate=""false"" BuiltIn=""false"" NiladicFunction=""false"" IsComposable=""true"" ParameterTypeSemantics=""AllowImplicitConversion"" Schema=""dbo""&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""input"" Type=""datetime"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""format"" Type=""nvarchar"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "        &lt;/Function&gt;" &amp; vbNewLine &amp; "        &lt;Function Name=""RegexIsMatch"" ReturnType=""bit"" Aggregate=""false"" BuiltIn=""false"" NiladicFunction=""false"" IsComposable=""true"" ParameterTypeSemantics=""AllowImplicitConversion"" Schema=""dbo""&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""input"" Type=""nvarchar(max)"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""pattern"" Type=""nvarchar"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""isIgnoreCase"" Type=""bit"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "        &lt;/Function&gt;" &amp; vbNewLine &amp; "        &lt;Function Name=""RegexMatch"" ReturnType=""nvarchar"" Aggregate=""false"" BuiltIn=""false"" NiladicFunction=""false"" IsComposable=""true"" ParameterTypeSemantics=""AllowImplicitConversion"" Schema=""dbo""&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""input"" Type=""nvarchar(max)"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""pattern"" Type=""nvarchar"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""isIgnoreCase"" Type=""bit"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""groupnum"" Type=""int"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "        &lt;/Function&gt;" &amp; vbNewLine &amp; "        &lt;Function Name=""RegexReplace"" ReturnType=""nvarchar"" Aggregate=""false"" BuiltIn=""false"" NiladicFunction=""false"" IsComposable=""true"" ParameterTypeSemantics=""AllowImplicitConversion"" Schema=""dbo""&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""input"" Type=""nvarchar(max)"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""pattern"" Type=""nvarchar"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""replacement"" Type=""nvarchar"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "          &lt;Parameter Name=""isIgnoreCase"" Type=""bit"" Mode=""In"" /&gt;" &amp; vbNewLine &amp; "        &lt;/Function&gt;" &amp; vbNewLine &amp; "&lt;/Schema&gt;")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <mdedda1:SsdlToDdlActivity TemplatePath="{x:Null}" DdlOutput="[Ddl]" ExistingSsdlInput="[ExistingSsdl]" sap2010:WorkflowViewState.IdRef="SsdlToDdlActivity_1" SsdlInput="[Ssdl]" />
+    <sads:DebugSymbol.Symbol>d5kBQzpcUHJvZ3JhbSBGaWxlcyAoeDg2KVxNaWNyb3NvZnQgVmlzdWFsIFN0dWRpbyAxMS4wXENvbW1vbjdcSURFXEV4dGVuc2lvbnNcTWljcm9zb2Z0XEVudGl0eSBGcmFtZXdvcmsgVG9vbHNcREJHZW5cVGFibGVQZXJUeXBlU3RyYXRlZ3kuV2l0aC5GdW5jdGlvbi54YW1sDTIDPg4CAQEzBTPGAwIBDTQFOw4CAQk8BTy4AQIBAjMwMzgCARQzuwMzwwMCARIzgAEzhwECARAznwEznAICAQ8zsQIzrwMCAQ42MTY3AgEKPFw8bAIBBzxCPEkCAQU8rQE8tQECAQM=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="CsdlToSsdlAndMslActivity_1" sap:VirtualizedContainerService.HintSize="243,22" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="243,61" />
+      <sap2010:ViewStateData Id="SsdlToDdlActivity_1" sap:VirtualizedContainerService.HintSize="243,22" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="265,309">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GenerateDatabaseScriptWorkflow_1" sap:VirtualizedContainerService.HintSize="305,389" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

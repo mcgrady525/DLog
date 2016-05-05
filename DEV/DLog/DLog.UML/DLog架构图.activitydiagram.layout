@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DLog架构图">
+  <activityRootModelMoniker Id="bae391b9-719b-48a2-ae0d-c93240e2bee1" />
+  <nestedChildShapes>
+    <actionShape Id="ef88bdac-984e-4a62-8ab2-7b41afb854fa" absoluteBounds="3, 5.375, 5, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="93a43307-ec56-4c53-9ae1-10b6641eeb13" LastKnownName="Data" />
+    </actionShape>
+    <actionShape Id="5dae6e88-f620-4c1c-bbdd-34f14cc93abe" absoluteBounds="3, 3.75, 5, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="7288f4df-b7c2-4840-8c0f-dec9c6231d31" LastKnownName="WCF BIZ" />
+    </actionShape>
+    <actionShape Id="1f60e735-0f32-45e5-8050-5a520f395a2e" absoluteBounds="3, 2.25, 2.5, 0.375" customColor="Gold">
+      <opaqueActionMoniker Id="7301513c-59a1-4959-85b7-78cb1bde8331" LastKnownName="OpenAPI" />
+    </actionShape>
+    <actionShape Id="2254ace8-723c-4ca8-bc98-b14d35286432" absoluteBounds="5.75, 2.25, 2.25, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="bf1d909f-a4a8-4c0c-8332-d9b572539f99" LastKnownName="Offline" />
+    </actionShape>
+    <actionShape Id="25783df6-8005-4441-ab26-ad8fb5c85dc5" absoluteBounds="8.125, 2.25, 1.125, 3.5" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="4e666c96-980f-4ba2-bb5b-ed042da4891d" LastKnownName="Entity" />
+    </actionShape>
+    <actionShape Id="e4f10fbe-0899-42e2-9740-668758a31e8c" absoluteBounds="1.75, 2.25, 1.125, 3.5" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="b558d716-2669-432c-9863-f7433f8a1965" LastKnownName="Common" />
+    </actionShape>
+    <actionShape Id="dc3a4901-5751-416f-8ae1-9c21d710432d" absoluteBounds="0.5, 2.25, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="750c6ae2-a2ee-4f85-a336-9a852d80e398" LastKnownName="Cache" />
+    </actionShape>
+    <actionShape Id="f240b3d9-0473-4a38-8b69-80601ba9ce36" absoluteBounds="0.5, 2.75, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="dba5efab-99f8-48b1-a931-f04375b87234" LastKnownName="Session" />
+    </actionShape>
+    <actionShape Id="9826ee0e-39df-4cd4-b93b-50530124c6fe" absoluteBounds="0.5, 3.25, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="aa55c0b8-1f9a-4678-a64b-90d7266b325a" LastKnownName="Log" />
+    </actionShape>
+    <actionShape Id="ada121a7-f3cf-4b2d-a93f-b7f96161215d" absoluteBounds="0.5, 3.75, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="fb97f6f7-b8cf-4c77-9e80-882fddebde9f" LastKnownName="序列化" />
+    </actionShape>
+    <actionShape Id="0ddc5036-14bd-47ba-af2e-b525686b1930" absoluteBounds="0.5, 4.25, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="15773ae4-0547-4964-953d-b6ea9143d5ff" LastKnownName="Config" />
+    </actionShape>
+    <actionShape Id="fb2d7962-0b24-41a1-ada6-67de40cda65d" absoluteBounds="0.5, 4.875, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="83230505-c260-4a21-800b-dba1403a2acf" LastKnownName="Exception" />
+    </actionShape>
+    <actionShape Id="deae1244-bd0e-4d1c-b11c-e42be500ecbf" absoluteBounds="0.5, 5.375, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="6b1e3b70-da80-471e-a7bf-c89993a0fd17" LastKnownName="Scheduler" />
+    </actionShape>
+    <actionShape Id="27230e8b-8e81-4b8f-9d2b-a5af7c897867" absoluteBounds="3, 1.5, 1.125, 0.375" customColor="Gold">
+      <opaqueActionMoniker Id="1b7294d6-eb46-4437-ba86-2ad405cfc3ce" LastKnownName="ABS" />
+    </actionShape>
+    <actionShape Id="5b483dd6-a5a8-4016-8b39-61edde0f72cc" absoluteBounds="4.375, 1.5, 1.125, 0.375" customColor="Gold">
+      <opaqueActionMoniker Id="42dd06ef-6b79-4bd9-95b3-9461b08e26ad" LastKnownName="HBS" />
+    </actionShape>
+    <commentShape Id="c3a2e02c-69d9-402b-8dcd-e84e9276a17a" absoluteBounds="4.875, 6.125, 1.25, 0.375" customColor="251, 247, 200">
+      <commentMoniker Id="0ce51103-f448-423a-ab95-48c38e7bbc2f" />
+      <relativeChildShapes />
+    </commentShape>
+    <commentShape Id="656389a6-a70f-4579-bf74-7a53a0a5ec81" absoluteBounds="1.5, 1.375, 1.25, 0.375" customColor="251, 247, 200">
+      <commentMoniker Id="b431cfac-4bc5-490c-99f8-711aa0d1a050" />
+      <relativeChildShapes />
+    </commentShape>
+    <commentShape Id="503f7a23-13af-4d36-bd27-ddd7753a7ffb" absoluteBounds="6.5, 1.375, 1.25, 0.375" customColor="251, 247, 200">
+      <commentMoniker Id="d033ee3d-a2ea-40fa-ae65-fb0c1ec6b702" />
+      <relativeChildShapes />
+    </commentShape>
+    <controlFlowConnector edgePoints="[(5.5 : 4.125); (5.5 : 5.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="a0af556d-65bf-4b5c-ab58-91a180a14b58" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="5dae6e88-f620-4c1c-bbdd-34f14cc93abe" />
+        <actionShapeMoniker Id="ef88bdac-984e-4a62-8ab2-7b41afb854fa" />
+      </nodes>
+    </controlFlowConnector>
+    <controlFlowConnector edgePoints="[(4.25 : 2.625); (4.25 : 3.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="89ee3f6b-52ea-47d7-8ee3-4db76ae01004" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="1f60e735-0f32-45e5-8050-5a520f395a2e" />
+        <actionShapeMoniker Id="5dae6e88-f620-4c1c-bbdd-34f14cc93abe" />
+      </nodes>
+    </controlFlowConnector>
+    <controlFlowConnector edgePoints="[(6.875 : 2.625); (6.875 : 3.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="c32cb764-2261-4fbb-ba2b-fe6715680c77" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="2254ace8-723c-4ca8-bc98-b14d35286432" />
+        <actionShapeMoniker Id="5dae6e88-f620-4c1c-bbdd-34f14cc93abe" />
+      </nodes>
+    </controlFlowConnector>
+    <controlFlowConnector edgePoints="[(3.5625 : 1.875); (3.5625 : 2.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="839edffd-db7c-4225-b8b8-ed4824b2a6f4" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="27230e8b-8e81-4b8f-9d2b-a5af7c897867" />
+        <actionShapeMoniker Id="1f60e735-0f32-45e5-8050-5a520f395a2e" />
+      </nodes>
+    </controlFlowConnector>
+    <controlFlowConnector edgePoints="[(4.9375 : 1.875); (4.9375 : 2.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="538fbf15-e492-426a-a44b-0b6efd9c8ad2" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="5b483dd6-a5a8-4016-8b39-61edde0f72cc" />
+        <actionShapeMoniker Id="1f60e735-0f32-45e5-8050-5a520f395a2e" />
+      </nodes>
+    </controlFlowConnector>
+    <commentConnector edgePoints="[(5.5 : 6.125); (5.5 : 5.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" TargetRelationshipDomainClassId="217d6bd0-42ed-4e7f-ad2b-af3ef5142428" customColor="Black">
+      <relativeChildShapes />
+      <nodes>
+        <commentShapeMoniker Id="c3a2e02c-69d9-402b-8dcd-e84e9276a17a" />
+        <actionShapeMoniker Id="ef88bdac-984e-4a62-8ab2-7b41afb854fa" />
+      </nodes>
+    </commentConnector>
+    <commentConnector edgePoints="[(2.75 : 1.75); (3 : 2.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="217d6bd0-42ed-4e7f-ad2b-af3ef5142428" customColor="Black">
+      <relativeChildShapes />
+      <nodes>
+        <commentShapeMoniker Id="656389a6-a70f-4579-bf74-7a53a0a5ec81" />
+        <actionShapeMoniker Id="1f60e735-0f32-45e5-8050-5a520f395a2e" />
+      </nodes>
+    </commentConnector>
+    <commentConnector edgePoints="[(7.125 : 1.75); (7.125 : 2.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" TargetRelationshipDomainClassId="217d6bd0-42ed-4e7f-ad2b-af3ef5142428" customColor="Black">
+      <relativeChildShapes />
+      <nodes>
+        <commentShapeMoniker Id="503f7a23-13af-4d36-bd27-ddd7753a7ffb" />
+        <actionShapeMoniker Id="2254ace8-723c-4ca8-bc98-b14d35286432" />
+      </nodes>
+    </commentConnector>
+  </nestedChildShapes>
+</activityDiagram>

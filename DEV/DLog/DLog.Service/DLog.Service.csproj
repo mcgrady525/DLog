@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D907AB01-C478-4B05-9ABA-8677C8FA912D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DLog.Service</RootNamespace>
+    <AssemblyName>DLog.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tmac.Frameworks.Common">
+      <HintPath>..\..\..\DLL\Tmac.Frameworks.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tmac.Frameworks.Log">
+      <HintPath>..\..\..\DLL\Tmac.Frameworks.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Tmac.Frameworks.Service">
+      <HintPath>..\..\..\DLL\Tmac.Frameworks.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="Tmac.Frameworks.Translation">
+      <HintPath>..\..\..\DLL\Tmac.Frameworks.Translation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DLogCommonService.svc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DLogDebugLogService.svc.cs" />
+    <Compile Include="DLogErrorLogService.svc.cs" />
+    <Compile Include="DLogPerfLogService.svc.cs" />
+    <Compile Include="DLogResourceService.svc.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLog.Common\DLog.Common.csproj">
+      <Project>{ab9923c4-9545-4db2-8917-9e191c878f09}</Project>
+      <Name>DLog.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DLog.Data\DLog.Data.csproj">
+      <Project>{302d9597-9d93-43b3-bebc-a07601445568}</Project>
+      <Name>DLog.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DLog.Entity\DLog.Entity.csproj">
+      <Project>{4987e03c-0d34-4d0b-b65c-9b486f223fa5}</Project>
+      <Name>DLog.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DLog.IService\DLog.IService.csproj">
+      <Project>{dc0c9ea1-ce0b-4804-b8ee-58d841ddeb88}</Project>
+      <Name>DLog.IService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

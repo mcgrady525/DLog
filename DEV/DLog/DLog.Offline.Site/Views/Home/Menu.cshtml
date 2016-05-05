@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeaderLink
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/zTree.v3/js/jquery.ztree.core-3.5.min.js")"></script>
+    <link href="@Url.Content("~/Scripts/zTree.v3/css/zTreeStyle/zTreeStyle.css")" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        body {
+            background-image:url(../../DLogSite/Content/images/menu_bg.png);
+            background-repeat:repeat;
+        }
+    </style>
+
+
+}
+
+<div class="footer">
+    <ul id="treeMenu" class="ztree"></ul>
+</div>
+
+<!--加上，为了jquery的智能提示-->
+@if (false)
+{
+    <script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+}
+
+@section FooterScript
+{
+    <script type="text/javascript">
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                },
+                key: {
+                    title: "title"
+                }
+            }
+        };
+
+        var zNodes = [
+        { id: 1, pId: 0, name: "系统设置", title: "" },
+        { id: 11, pId: 1, name: "修改配置", url: "@Url.Action("ModifyConfig", "Menu")", target: "WorkspaceFrame", title: "修改配置" },
+        { id: 12, pId: 1, name: "修改密码", url: "@Url.Action("ModifyPassword", "Menu")", target: "WorkspaceFrame", title: "修改密码" },
+        { id: 2, pId: 0, name: "调试日志", title: "" },
+        { id: 21, pId: 2, name: "列表页", url: "@Url.Action("DebugLogList", "Menu")", target: "WorkspaceFrame", title: "调试日志列表页" },
+        { id: 3, pId: 0, name: "错误日志", title: "" },
+        { id: 31, pId: 3, name: "列表页", url: "@Url.Action("ErrorLogList", "Menu")", target: "WorkspaceFrame", title: "错误日志列表页" },
+        { id: 4, pId: 0, name: "性能日志", title: "" },
+        { id: 41, pId: 4, name: "列表页", url: "@Url.Action("PerfLogList", "Menu")", target: "WorkspaceFrame", title: "性能日志列表页" },
+        
+
+        ];
+
+        $(function () {
+            //初始化树形菜单
+            var tree = $.fn.zTree.init($("#treeMenu"), setting, zNodes);
+        });
+
+    </script>
+    
+}
