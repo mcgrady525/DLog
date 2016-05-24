@@ -20,9 +20,7 @@ namespace DLog.Data
       public DLogDB()
             : base(string.Format(@"metadata=res://*/DLogDB.csdl|res://*/DLogDB.ssdl|res://*/DLogDB.msl;provider=System.Data.SqlClient;provider connection string='{0};multipleactiveresultsets=True;App=EntityFramework'",System.Configuration.ConfigurationManager.ConnectionStrings["DLogDB"].ConnectionString))
         {
-    		this.Configuration.ProxyCreationEnabled = false; //默认关闭代理类		
-            this.Configuration.ProxyCreationEnabled = false;
-    
+    			this.Configuration.ProxyCreationEnabled = false; //默认关闭代理类
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

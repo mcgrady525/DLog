@@ -72,9 +72,7 @@ namespace <#=Code.EscapeNamespace(ObjectNamespace)#>
 <#
         WriteLazyLoadingEnabled(container);
         #>
-		<#="this.Configuration.ProxyCreationEnabled = false; //默认关闭代理类"#>		
-        <#="this.Configuration.ProxyCreationEnabled = false;"#>
-
+			<#="this.Configuration.ProxyCreationEnabled = false; //默认关闭代理类"#>
     }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
