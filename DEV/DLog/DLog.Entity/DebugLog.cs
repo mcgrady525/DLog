@@ -25,7 +25,7 @@ namespace DLog.Entity
 /// </summary>
 [Serializable]
 [DataContract(IsReference = true)]
-[MetadataType(typeof(DebugLogMetadata))]
+[MetadataType(typeof(DebugLogMetadata))]  
 public partial class DebugLog
 {
 
